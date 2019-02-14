@@ -1,7 +1,7 @@
 = form_for @player do |f|
   - if @player.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@player.errors.count, "error")} prohibited this player from being saved:"
+      %h2= "#{pluralize(@player.errors.count, "error")} No se puede guardar la información:"
       %ul
         - @player.errors.full_messages.each do |message|
           %li= message
@@ -11,6 +11,6 @@
     = f.text_field :name
   .field
     = f.label :money
-    = f.number_field :money
+    = f.number_field :money, min: 10000
   .actions
-    = f.submit 'Save'
+    = f.submit 'Guardar'

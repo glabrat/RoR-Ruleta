@@ -1,12 +1,12 @@
 %p#notice= notice
 
 %p
-  %b Name:
+  %b Nombre:
   = @player.name
 %p
-  %b Money:
+  %b Dinero:
   = @player.money
 
-= link_to 'Edit', edit_player_path(@player)
+= link_to 'Editar', edit_player_path(@player)
 \|
-= link_to 'Back', players_path
+= link_to 'Volver', players_path

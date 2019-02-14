@@ -1,10 +1,10 @@
-%h1 Listing players
+%h1 Lista de Jugadores
 
 %table
   %thead
     %tr
-      %th Name
-      %th Money
+      %th Nombre
+      %th Dinero
       %th
       %th
       %th
@@ -13,11 +13,11 @@
     - @players.each do |player|
       %tr
         %td= player.name
-        %td= player.money
+        %td= number_to_pesos(player.money)
         %td= link_to 'Show', player
         %td= link_to 'Edit', edit_player_path(player)
-        %td= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Destroy', player, method: :delete, data: { confirm: '¿Está seguro?' }
 
 %br
 
-= link_to 'New Player', new_player_path
+= link_to 'Jugador Nuevo', new_player_path
