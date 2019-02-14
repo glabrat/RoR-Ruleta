@@ -21,7 +21,8 @@
         %td= link_to '¡Jugar!', game
         %td= link_to 'Editar', edit_game_path(game)
         %td= link_to 'Destruir', game, method: :delete, data: { confirm: 'Are you sure?' }
-
+        
 %br
 
-= link_to 'Crear sala', new_game_path
+%p= link_to 'Crear sala', new_game_path
+%p= link_to 'Jugadores', 'players'

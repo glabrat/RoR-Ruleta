@@ -3,18 +3,50 @@
 %p TODO
 
 %p
-  %b Name:
+  %b Nombre de la sala:
   = @game.name
 %p
-  %b Min players:
+  %b Mínimo de jugadores:
   = @game.min_players
 %p
-  %b Max players:
+  %b Máximo de jugadores:
   = @game.max_players
 %p
-  %b Time rounds:
-  = @game.time_rounds
+  %b Tiempo entre rondas:
+  %span.time_rounds= @game.time_rounds
 
-= link_to 'Editar', edit_game_path(@game)
-\|
+%p
+  %b Ronda actual:
+  = 1
+
+=image_tag ('wheel.png')
+
+
+%h1 Lista Rondas
+
+%table
+  %thead
+    %tr
+      %th Nº Ronda
+      %th Cantidad de jugadores
+      %th Clima 
+      %th Tiempo para la próxima ronda
+      %th
+      %th
+      %th
+
+  %tbody
+    - @games.each do |game|
+      %tr
+        %td= game.name
+        %td= game.min_players
+        %td= game.max_players
+        %td 
+          %span.timer 0
+        %td= link_to 'Detalle', game
+        %td= link_to 'Acelerar ronda', edit_game_path(game)
+        
+          
+
 = link_to 'Volver', games_path
+= link_to 'Terminar Juego', '#'

@@ -2,12 +2,14 @@
 
 one:
   player_money: 1
+  player_money_bet: 1
   player_bet: 1
   player_id: 1
   roulette_id: 1
 
 two:
   player_money: 1
+  player_money_bet: 1
   player_bet: 1
   player_id: 1
   roulette_id: 1
