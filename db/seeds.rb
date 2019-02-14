@@ -7,3 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Player.create({name: 'Bot 1', money: 10000})
+Game.create({name: 'Ruleta 1', min_players: 4, max_players: 8, time_rounds: 180})
