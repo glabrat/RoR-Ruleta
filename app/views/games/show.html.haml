@@ -1,0 +1,20 @@
+%p#notice= notice
+
+%p TODO
+
+%p
+  %b Name:
+  = @game.name
+%p
+  %b Min players:
+  = @game.min_players
+%p
+  %b Max players:
+  = @game.max_players
+%p
+  %b Time rounds:
+  = @game.time_rounds
+
+= link_to 'Editar', edit_game_path(@game)
+\|
+= link_to 'Volver', games_path

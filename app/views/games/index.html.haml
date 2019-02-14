@@ -1,0 +1,27 @@
+%h1 Lista de salas de juegos
+
+%table
+  %thead
+    %tr
+      %th Nombre de la sala
+      %th Mínimo de jugadores
+      %th Máximo de jugadores
+      %th Tiempo de las rondas
+      %th
+      %th
+      %th
+
+  %tbody
+    - @games.each do |game|
+      %tr
+        %td= game.name
+        %td= game.min_players
+        %td= game.max_players
+        %td= game.time_rounds
+        %td= link_to '¡Jugar!', game
+        %td= link_to 'Editar', edit_game_path(game)
+        %td= link_to 'Destruir', game, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'Crear sala', new_game_path

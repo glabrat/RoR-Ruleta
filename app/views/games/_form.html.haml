@@ -1,0 +1,22 @@
+= form_for @game do |f|
+  - if @game.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@game.errors.count, "error")} No se puede guardar la información:"
+      %ul
+        - @game.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :min_players
+    = f.number_field :min_players
+  .field
+    = f.label :max_players
+    = f.number_field :max_players
+  .field
+    = f.label :time_rounds
+    = f.number_field :time_rounds
+  .actions
+    = f.submit 'Guardar'
