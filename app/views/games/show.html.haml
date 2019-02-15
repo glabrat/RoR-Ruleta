@@ -36,11 +36,11 @@
       %th
 
   %tbody
-    - @games.each do |game|
+    - @roulettes.each do |roulette_round|
       %tr
-        %td= 
-        %td= 
-        %td= 
+        %td= roulette_round.name
+        %td 
+        %td 
         %td 
           %span.timer 0
         %td= link_to 'Detalle', game
