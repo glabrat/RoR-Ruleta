@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :roulettes
   resources :rounds
 
+  match "*path", to: "application#index", via: :all
+
   get 'welcome/index'
   
   root 'welcome#index'

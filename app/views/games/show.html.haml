@@ -17,7 +17,7 @@
 
 %p
   %b Ronda actual:
-  = 1
+  = @roulettes.maximum(:number_rounds)
 
 =image_tag ('wheel.png')
 
@@ -30,23 +30,24 @@
       %th Nº Ronda
       %th Cantidad de jugadores
       %th Clima 
+      %th Número ganador 
       %th Tiempo para la próxima ronda
       %th
       %th
       %th
 
   %tbody
-    - @roulettes.each do |roulette_round|
+    - @roulettes.each do |roulette|
       %tr
-        %td= roulette_round.name
+        %td= roulette.number_rounds
+        %td= 4 
+        %td= roulette.weather_avg
+        %td= roulette.winning_number
         %td 
-        %td 
-        %td 
-          %span.timer 0
-        %td= link_to 'Detalle', game
+          %span.timer 
+        %td= link_to 'Detalle', roulette
         %td= link_to 'Acelerar ronda', '#'
-        
-          
+   
 
 = link_to 'Volver', games_path
 = link_to 'Terminar Juego', '#'

@@ -1,4 +1,4 @@
-class Roulette
+class RouletteGame
 
     attr_accessor :number_roulette, :player_bet
 

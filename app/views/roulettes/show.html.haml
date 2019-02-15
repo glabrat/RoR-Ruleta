@@ -1,0 +1,10 @@
+%p#notice= notice
+
+%p
+    %b Ronda:
+    = @roulette.number_rounds
+%p
+    %b Clima:
+    = @roulette.weather_avg
+
+= link_to 'Volver', "/games/#{@roulette.game_id}"

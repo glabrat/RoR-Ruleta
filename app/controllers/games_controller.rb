@@ -11,6 +11,13 @@ class GamesController < ApplicationController
   # GET /games/1.json
   def show
     @games = Game.all
+    @game = Game.find(params[:id])
+
+    roulette = RouletteGame.new
+
+    @roulettes = Roulette.where(game_id: @game.id)
+
+    @player_bet = roulette.player_bet
   end
 
   # GET /games/new
@@ -29,8 +36,12 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
-        format.json { render :show, status: :created, location: @game }
+        roulette = RouletteGame.new
+        @roulettes = Roulette.new(game_id: @game.id, weather_avg: 10, number_rounds: 1, winning_number: roulette.spin)
+        if @roulettes.save
+          format.html { redirect_to @game, notice: 'Game was successfully created.' }
+          format.json { render :show, status: :created, location: @game }
+        end
       else
         format.html { render :new }
         format.json { render json: @game.errors, status: :unprocessable_entity }
@@ -72,4 +83,6 @@ class GamesController < ApplicationController
     def game_params
       params.require(:game).permit(:name, :min_players, :max_players, :time_rounds)
     end
+
+    
 end
