@@ -14,9 +14,13 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
 
     roulette = RouletteGame.new
-
-    @roulettes = Roulette.where(game_id: @game.id)
-
+    if Roulette.exists?(game_id: @game.id)
+      @roulettes = Roulette.where(game_id: @game.id)
+    else
+      @roulettes = Roulette.new(game_id: @game.id, weather_avg: 10, number_rounds: 1, winning_number: roulette.spin)
+      @roulettes.save
+    end
+    
     @player_bet = roulette.player_bet
   end
 
@@ -36,12 +40,8 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        roulette = RouletteGame.new
-        @roulettes = Roulette.new(game_id: @game.id, weather_avg: 10, number_rounds: 1, winning_number: roulette.spin)
-        if @roulettes.save
           format.html { redirect_to @game, notice: 'Game was successfully created.' }
           format.json { render :show, status: :created, location: @game }
-        end
       else
         format.html { render :new }
         format.json { render json: @game.errors, status: :unprocessable_entity }
