@@ -51,7 +51,6 @@ class RouletteGame
         else
             return 'green'
         end
-            
     end
 
 end

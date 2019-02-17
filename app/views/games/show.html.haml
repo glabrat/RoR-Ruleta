@@ -21,33 +21,7 @@
 
 =image_tag ('wheel.png')
 
-
-%h1 Lista Rondas
-
-%table
-  %thead
-    %tr
-      %th Nº Ronda
-      %th Cantidad de jugadores
-      %th Clima 
-      %th Número ganador 
-      %th Tiempo para la próxima ronda
-      %th
-      %th
-      %th
-
-  %tbody
-    - @roulettes.each do |roulette|
-      %tr
-        %td= roulette.number_rounds
-        %td= 4 
-        %td= roulette.weather_avg
-        %td= roulette.winning_number
-        %td 
-          %span.timer 
-        %td= link_to 'Detalle', roulette
-        %td= link_to 'Acelerar ronda', '#'
-   
-
+  = link_to 'Ver Juego', "/roulettes/#{@roulettes.id}"
+\|
 = link_to 'Volver', games_path
 = link_to 'Terminar Juego', '#'

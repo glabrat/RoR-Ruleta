@@ -1,0 +1,19 @@
+%h1 Listing roulettes
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @roulettes.each do |roulette|
+      %tr
+        %td= link_to 'Show', roulette
+        %td= link_to 'Edit', edit_roulette_path(roulette)
+        %td= link_to 'Destroy', roulette, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Roulette', new_roulette_path

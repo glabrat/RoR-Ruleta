@@ -10,7 +10,6 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
-    @games = Game.all
     @game = Game.find(params[:id])
 
     roulette = RouletteGame.new
@@ -40,7 +39,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-          format.html { redirect_to @game, notice: 'Game was successfully created.' }
+          format.html { redirect_to '/games', notice: 'Game was successfully created.' }
           format.json { render :show, status: :created, location: @game }
       else
         format.html { render :new }
@@ -54,7 +53,7 @@ class GamesController < ApplicationController
   def update
     respond_to do |format|
       if @game.update(game_params)
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
+        format.html { redirect_to '/games', notice: 'Game was successfully updated.' }
         format.json { render :show, status: :ok, location: @game }
       else
         format.html { render :edit }
