@@ -5,21 +5,16 @@ class RoulettesController < ApplicationController
   # GET /roulettes.json
   def index
     @roulettes = Roulette.all
+    @game = Game.first!
+    @players = Player.all
   end
 
   # GET /roulettes/1
   # GET /roulettes/1.json
   def show
-    # if Roulette.exists?(game_id: @game.id)
-    #   @roulettes = Roulette.where(game_id: @game.id)
-    # else
-    #   @roulettes = Roulette.new(game_id: @game.id, weather_avg: 10, number_rounds: 1, winning_number: roulette.spin)
-    #   @roulettes.save
-    # end
     @roulettes = Roulette.all
     @game = Game.first!
     @players = Player.all
-    #@player_bet = roulette.player_bet
   end
 
   # GET /roulettes/new

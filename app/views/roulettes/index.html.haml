@@ -1,12 +1,39 @@
-%h1 Listing roulettes
+%p#notice= notice
+
+%p
+  %b Nombre de la sala:
+  = @game.name
+%p
+  %b Mínimo de jugadores:
+  = @game.min_players
+%p
+  %b Máximo de jugadores:
+  = @game.max_players
+%p
+  %b Tiempo entre rondas:
+  %span.time_rounds= @game.time_rounds
+%p
+  %b Temperatura promedio:
+  = @roulettes.last.weather_avg
+%p
+  %b Ronda actual:
+  = @roulettes.maximum(:number_rounds)
+%p
+  %b Número ganador:
+  = @roulettes.last.winning_number
+
+=image_tag ('wheel.png')
+
+%h1 Lista Rondas
 
 %table
   %thead
     %tr
-      %th Game
-      %th Weather avg
-      %th Number rounds
-      %th Winning number
+      %th Nº Ronda
+      %th Cantidad de jugadores
+      %th Clima 
+      %th Número ganador 
+      %th Tiempo para la próxima ronda
       %th
       %th
       %th
@@ -14,16 +41,18 @@
   %tbody
     - @roulettes.each do |roulette|
       %tr
-        %td= roulette.game_id
-        %td= roulette.weather_avg
         %td= roulette.number_rounds
+        %td= @players.count 
+        %td= roulette.weather_avg
         %td= roulette.winning_number
-        %td= link_to 'Show', roulette
-        %td= link_to 'Edit', edit_roulette_path(roulette)
-        %td= link_to 'Destroy', roulette, method: :delete, data: { confirm: 'Are you sure?' }
+        - if roulette == @roulettes.last
+          %td 
+            %span.timer 
+        - else
+          %td 0
+        %td= link_to 'Detalle', '/rounds/'
+        -if roulette == @roulettes.last
+          %td= button_to 'Acelerar Ronda!', roulette_path('', game_id: roulette.game_id, number_rounds: roulette.number_rounds + 1)
 
-%br
-
-= link_to 'New Roulette', new_roulette_path
-
-= link_to 'Volver', games_path
+= link_to 'Volver', roulettes_path
+= link_to 'Terminar Juego', '#'

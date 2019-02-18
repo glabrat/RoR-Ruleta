@@ -1,7 +1,5 @@
 %p#notice= notice
 
-%p TODO
-
 %p
   %b Nombre de la sala:
   = @game.name
@@ -14,33 +12,20 @@
 %p
   %b Tiempo entre rondas:
   %span.time_rounds= @game.time_rounds
-
+%p
+  %b Temperatura promedio:
+  = @roulette.weather_avg
+%p
+  %b Número de rondas:
+  = @roulette.number_rounds
 %p
   %b Ronda actual:
   = @roulettes.maximum(:number_rounds)
-
-  %p#notice= notice
-
-  %p
-    %b Game:
-    = @roulette.game_id
-  %p
-    %b Weather avg:
-    = @roulette.weather_avg
-  %p
-    %b Number rounds:
-    = @roulette.number_rounds
-  %p
-    %b Winning number:
-    = @roulette.winning_number
-  
-  = link_to 'Edit', edit_roulette_path(@roulette)
-  \|
-  = link_to 'Back', roulettes_path
-  
+%p
+  %b Número ganador:
+  = @roulette.winning_number
 
 =image_tag ('wheel.png')
-
 
 %h1 Lista Rondas
 
@@ -63,11 +48,14 @@
         %td= @players.count 
         %td= roulette.weather_avg
         %td= roulette.winning_number
-        %td 
-          %span.timer 
+        - if roulette == @roulettes.last
+          %td 
+            %span.timer 
+        - else
+          %td 0
         %td= link_to 'Detalle', '/rounds/'
-        %td= button_to 'Acelerar Ronda!', roulette_path('', game_id: roulette.game_id, number_rounds: roulette.number_rounds + 1)
-    
+        -if roulette == @roulettes.last
+          %td= button_to 'Acelerar Ronda!', roulette_path('', game_id: roulette.game_id, number_rounds: roulette.number_rounds + 1)
 
 = link_to 'Volver', roulettes_path
 = link_to 'Terminar Juego', '#'
