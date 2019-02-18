@@ -14,6 +14,7 @@ class RoundsTest < ApplicationSystemTestCase
     visit rounds_url
     click_on "New Round"
 
+    fill_in "Player bet", with: @round.player_bet
     fill_in "Player final money", with: @round.player_final_money
     fill_in "Player", with: @round.player_id
     fill_in "Player money", with: @round.player_money
@@ -29,6 +30,7 @@ class RoundsTest < ApplicationSystemTestCase
     visit rounds_url
     click_on "Edit", match: :first
 
+    fill_in "Player bet", with: @round.player_bet
     fill_in "Player final money", with: @round.player_final_money
     fill_in "Player", with: @round.player_id
     fill_in "Player money", with: @round.player_money

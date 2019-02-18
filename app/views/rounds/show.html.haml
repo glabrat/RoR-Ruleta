@@ -7,6 +7,9 @@
   %b Player money bet:
   = @round.player_money_bet
 %p
+  %b Player bet:
+  = @round.player_bet
+%p
   %b Player:
   = @round.player_id
 %p
@@ -16,6 +19,4 @@
   %b Player final money:
   = @round.player_final_money
 
-= link_to 'Edit', edit_round_path(@round)
-\|
 = link_to 'Back', rounds_path

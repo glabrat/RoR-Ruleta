@@ -5,6 +5,7 @@
     %tr
       %th Player money
       %th Player money bet
+      %th Player bet
       %th Player
       %th Roulette
       %th Player final money
@@ -17,6 +18,7 @@
       %tr
         %td= round.player_money
         %td= round.player_money_bet
+        %td= round.player_bet
         %td= round.player_id
         %td= round.roulette_id
         %td= round.player_final_money
@@ -25,5 +27,3 @@
         %td= link_to 'Destroy', round, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
-
-= link_to 'New Round', new_round_path

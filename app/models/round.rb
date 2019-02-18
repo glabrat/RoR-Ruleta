@@ -1,4 +1,4 @@
 class Round < ApplicationRecord
     belongs_to :roulette
-    has_many :players
+    belongs_to :player
 end

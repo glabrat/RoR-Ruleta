@@ -18,6 +18,7 @@ class RoulettesController < ApplicationController
     # end
     @roulettes = Roulette.all
     @game = Game.first!
+    @players = Player.all
     #@player_bet = roulette.player_bet
   end
 

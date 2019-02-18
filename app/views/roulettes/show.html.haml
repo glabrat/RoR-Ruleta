@@ -60,13 +60,13 @@
     - @roulettes.each do |roulette|
       %tr
         %td= roulette.number_rounds
-        %td= 4 
+        %td= @players.count 
         %td= roulette.weather_avg
         %td= roulette.winning_number
         %td 
           %span.timer 
-        %td= link_to 'Detalle', roulette
-        %td= link_to 'Acelerar ronda', '#'
+        %td= link_to 'Detalle', '/rounds/'
+        %td= button_to 'Acelerar Ronda!', roulette_path('', game_id: roulette.game_id, number_rounds: roulette.number_rounds + 1)
     
 
 = link_to 'Volver', roulettes_path
