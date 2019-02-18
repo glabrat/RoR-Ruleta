@@ -52,9 +52,16 @@ class RouletteGame
     end
 
     def random_player_bet(money)
-
-        bet = rand(8..15)
+        bet = @weather > 20? rand(3..7) : rand(8..15)
         return (money / 100) * bet
+    end
+
+    def get_weather
+        require 'uri'
+        require 'net/http'
+        api_key = Rails.application.credentials.dig(:secret_key_weather_api)
+        uri = URI("http://api.meteored.cl/index.php?api_lang=cl&localidad=18578&affiliate_id=#{api_key}")
+        Net::HTTP.post_form(uri ,{}).body
     end
 
 end
