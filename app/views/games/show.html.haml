@@ -1,28 +1,21 @@
 %p#notice= notice
 
-%p TODO
-
 %p
-  %b Nombre de la sala:
+  %b Name:
   = @game.name
 %p
-  %b Mínimo de jugadores:
+  %b Min players:
   = @game.min_players
 %p
-  %b Máximo de jugadores:
+  %b Max players:
   = @game.max_players
 %p
-  %b Tiempo entre rondas:
-  %span.time_rounds= @game.time_rounds
-
+  %b Time rounds:
+  = @game.time_rounds
 %p
-  %b Ronda actual:
-  -# = @roulettes.maximum(:number_rounds)
+  %b Auto play:
+  = @game.auto_play
 
-=image_tag ('wheel.png')
-
-= link_to 'Ver Juego', roulettes_path
+= link_to 'Edit', edit_game_path(@game)
 \|
-= link_to 'Volver', games_path
-\|
-= link_to 'Terminar Juego', '#'
+= link_to 'Back', games_path

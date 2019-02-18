@@ -10,9 +10,6 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
-    @game = Game.find(params[:id])
-
-    @roulettes = Roulette.where(game_id: @game.id)
   end
 
   # GET /games/new
@@ -31,8 +28,8 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-          format.html { redirect_to '/games', notice: 'Game was successfully created.' }
-          format.json { render :show, status: :created, location: @game }
+        format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        format.json { render :show, status: :created, location: @game }
       else
         format.html { render :new }
         format.json { render json: @game.errors, status: :unprocessable_entity }
@@ -45,7 +42,7 @@ class GamesController < ApplicationController
   def update
     respond_to do |format|
       if @game.update(game_params)
-        format.html { redirect_to '/games', notice: 'Game was successfully updated.' }
+        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
         format.json { render :show, status: :ok, location: @game }
       else
         format.html { render :edit }
@@ -72,8 +69,6 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:name, :min_players, :max_players, :time_rounds)
+      params.require(:game).permit(:name, :min_players, :max_players, :time_rounds, :auto_play)
     end
-
-    
 end

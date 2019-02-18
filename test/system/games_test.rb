@@ -14,6 +14,7 @@ class GamesTest < ApplicationSystemTestCase
     visit games_url
     click_on "New Game"
 
+    fill_in "Auto play", with: @game.auto_play
     fill_in "Max players", with: @game.max_players
     fill_in "Min players", with: @game.min_players
     fill_in "Name", with: @game.name
@@ -28,6 +29,7 @@ class GamesTest < ApplicationSystemTestCase
     visit games_url
     click_on "Edit", match: :first
 
+    fill_in "Auto play", with: @game.auto_play
     fill_in "Max players", with: @game.max_players
     fill_in "Min players", with: @game.min_players
     fill_in "Name", with: @game.name
