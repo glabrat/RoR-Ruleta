@@ -1,0 +1,29 @@
+%h1 Listing rounds
+
+%table
+  %thead
+    %tr
+      %th Player money
+      %th Player money bet
+      %th Player
+      %th Roulette
+      %th Player final money
+      %th
+      %th
+      %th
+
+  %tbody
+    - @rounds.each do |round|
+      %tr
+        %td= round.player_money
+        %td= round.player_money_bet
+        %td= round.player_id
+        %td= round.roulette_id
+        %td= round.player_final_money
+        %td= link_to 'Show', round
+        %td= link_to 'Edit', edit_round_path(round)
+        %td= link_to 'Destroy', round, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Round', new_round_path

@@ -19,7 +19,7 @@
         %td= game.min_players
         %td= game.max_players
         %td= game.time_rounds        
-        %td= button_to '¡Jugar!', roulette_path('', game_id: game.id)
+        %td= button_to '¡Jugar!', roulette_path('', game_id: game.id, number_rounds: 1)
         %td= link_to 'Ver Estadísticas', game
         %td= link_to 'Editar', edit_game_path(game)
         %td= link_to 'Destruir', game, method: :delete, data: { confirm: 'Are you sure?' }

@@ -33,11 +33,15 @@ class RoulettesController < ApplicationController
   # POST /roulettes
   # POST /roulettes.json
   def create
-    @roulettes = RouletteGame.new
-    @roulette = Roulette.new(roulette_params)
+    roulette_game = RouletteGame.new
+    roulette_hash_db = Hash.new
+    roulette_hash_db = { :game_id => params[:game_id], :weather_avg => roulette_game.get_weather_avg, :number_rounds => params[:number_rounds], :winning_number => roulette_game.spin } 
+
+    @roulette = Roulette.new(roulette_hash_db)
 
     respond_to do |format|
       if @roulette.save
+        make_round_happen
         format.html { redirect_to @roulette, notice: 'Roulette was successfully created.' }
         format.json { render :show, status: :created, location: @roulette }
       else
@@ -68,6 +72,26 @@ class RoulettesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to roulettes_url, notice: 'Roulette was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def make_round_happen    
+    @players = Player.all
+    @roulette_game = RouletteGame.new
+    @roulette_game.set_weather_avg(@roulette.weather_avg)
+
+    @players.each do |player|
+      player_money = player.money
+      player_money_bet = player_money <= 1000 ? player_money : @roulette_game.random_player_bet(player_money)
+      player_bet = @roulette_game.player_bet
+      player_money_gained = @roulette_game.win_lose(@roulette.winning_number, player_bet, player_money_bet)
+      player_final_money = (player_money - player_money_bet) + player_money_gained
+      round_per_player = { :player_money => player_money, :player_money_bet => player_money_bet, :player_bet => player_bet, :player_id => player.id, :roulette_id => @roulette.id, :player_final_money => player_final_money} 
+
+      @round = Round.new(round_per_player)
+      if @round.save
+        ::Player.update(player.id, :money => player_final_money )
+      end
     end
   end
 

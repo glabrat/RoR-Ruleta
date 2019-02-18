@@ -12,15 +12,7 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
 
-    roulette = RouletteGame.new
-    if Roulette.exists?(game_id: @game.id)
-      @roulettes = Roulette.where(game_id: @game.id)
-    else
-      @roulettes = Roulette.new(game_id: @game.id, weather_avg: 10, number_rounds: 1, winning_number: roulette.spin)
-      @roulettes.save
-    end
-    
-    @player_bet = roulette.player_bet
+    @roulettes = Roulette.where(game_id: @game.id)
   end
 
   # GET /games/new

@@ -54,13 +54,17 @@ class RouletteGame
     def random_player_bet(money)
         @weather_avg ||= self.get_weather
         bet = @weather_avg > 20? rand(3..7) : rand(8..15)
-        @money_bet = (money / 100) * bet
-        return @money_bet
+        money_bet = (money / 100) * bet
+        return money_bet
     end
 
-    def win_lose
-        roulette_color = self.number_to_color(@number_roulette)
-        player_color = self.number_to_color(@player_bet)
+    def set_weather_avg(weather_avg)
+        @weather_avg = weather_avg
+    end
+
+    def win_lose(number_roulette, player_bet, player_money_bet)
+        roulette_color = self.number_to_color(number_roulette)
+        player_color = self.number_to_color(player_bet)
         multiplier = 0
         if roulette_color == player_color 
             if roulette_color == 'green'
@@ -70,10 +74,10 @@ class RouletteGame
             end
         end
 
-        return (@money_bet * multiplier)
+        return (player_money_bet * multiplier)
     end
 
-    def get_weather
+    def get_weather_avg
         require 'open-uri'
         weather_avg = 0
         api_key = Rails.application.credentials.dig(:secret_key_weather_api) #https://www.viget.com/articles/storing-secret-credentials-in-rails-5-2-and-up/
