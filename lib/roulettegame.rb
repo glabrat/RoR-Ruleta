@@ -1,7 +1,5 @@
 class RouletteGame
 
-    attr_accessor :number_roulette, :player_bet
-
     def initialize
 
     end
@@ -41,8 +39,8 @@ class RouletteGame
     end
 
     def number_to_color(number)
-        black = [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33,35]
-        red = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34,36]
+        black = [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35]
+        red = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]
 
         if black.include?(number)
             return 'black'
@@ -51,6 +49,12 @@ class RouletteGame
         else
             return 'green'
         end
+    end
+
+    def random_player_bet(money)
+
+        bet = rand(8..15)
+        return (money / 100) * bet
     end
 
 end

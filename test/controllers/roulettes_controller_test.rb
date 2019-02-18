@@ -17,7 +17,7 @@ class RoulettesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create roulette" do
     assert_difference('Roulette.count') do
-      post roulettes_url, params: { roulette: {  } }
+      post roulettes_url, params: { roulette: { game_id: @roulette.game_id, number_rounds: @roulette.number_rounds, weather_avg: @roulette.weather_avg, winning_number: @roulette.winning_number } }
     end
 
     assert_redirected_to roulette_url(Roulette.last)
@@ -34,7 +34,7 @@ class RoulettesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update roulette" do
-    patch roulette_url(@roulette), params: { roulette: {  } }
+    patch roulette_url(@roulette), params: { roulette: { game_id: @roulette.game_id, number_rounds: @roulette.number_rounds, weather_avg: @roulette.weather_avg, winning_number: @roulette.winning_number } }
     assert_redirected_to roulette_url(@roulette)
   end
 

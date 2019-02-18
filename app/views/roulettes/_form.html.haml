@@ -6,5 +6,17 @@
         - @roulette.errors.full_messages.each do |message|
           %li= message
 
+  .field
+    = f.label :game_id
+    = f.number_field :game_id
+  .field
+    = f.label :weather_avg
+    = f.number_field :weather_avg
+  .field
+    = f.label :number_rounds
+    = f.number_field :number_rounds
+  .field
+    = f.label :winning_number
+    = f.number_field :winning_number
   .actions
     = f.submit 'Save'

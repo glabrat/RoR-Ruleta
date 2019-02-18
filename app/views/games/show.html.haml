@@ -17,11 +17,12 @@
 
 %p
   %b Ronda actual:
-  = @roulettes.maximum(:number_rounds)
+  -# = @roulettes.maximum(:number_rounds)
 
 =image_tag ('wheel.png')
 
-  = link_to 'Ver Juego', "/roulettes/#{@roulettes.id}"
+= link_to 'Ver Juego', roulettes_path
 \|
 = link_to 'Volver', games_path
+\|
 = link_to 'Terminar Juego', '#'

@@ -1,53 +1,73 @@
 %p#notice= notice
 
-    %p TODO
+%p TODO
+
+%p
+  %b Nombre de la sala:
+  = @game.name
+%p
+  %b Mínimo de jugadores:
+  = @game.min_players
+%p
+  %b Máximo de jugadores:
+  = @game.max_players
+%p
+  %b Tiempo entre rondas:
+  %span.time_rounds= @game.time_rounds
+
+%p
+  %b Ronda actual:
+  = @roulettes.maximum(:number_rounds)
+
+  %p#notice= notice
+
+  %p
+    %b Game:
+    = @roulette.game_id
+  %p
+    %b Weather avg:
+    = @roulette.weather_avg
+  %p
+    %b Number rounds:
+    = @roulette.number_rounds
+  %p
+    %b Winning number:
+    = @roulette.winning_number
+  
+  = link_to 'Edit', edit_roulette_path(@roulette)
+  \|
+  = link_to 'Back', roulettes_path
+  
+
+=image_tag ('wheel.png')
+
+
+%h1 Lista Rondas
+
+%table
+  %thead
+    %tr
+      %th Nº Ronda
+      %th Cantidad de jugadores
+      %th Clima 
+      %th Número ganador 
+      %th Tiempo para la próxima ronda
+      %th
+      %th
+      %th
+
+  %tbody
+    - @roulettes.each do |roulette|
+      %tr
+        %td= roulette.number_rounds
+        %td= 4 
+        %td= roulette.weather_avg
+        %td= roulette.winning_number
+        %td 
+          %span.timer 
+        %td= link_to 'Detalle', roulette
+        %td= link_to 'Acelerar ronda', '#'
     
-    %p
-      %b Nombre de la sala:
-      = @game.name
-    %p
-      %b Mínimo de jugadores:
-      = @game.min_players
-    %p
-      %b Máximo de jugadores:
-      = @game.max_players
-    %p
-      %b Tiempo entre rondas:
-      %span.time_rounds= @game.time_rounds
-    
-    %p
-      %b Ronda actual:
-      = @roulettes.maximum(:number_rounds)
-    
-    =image_tag ('wheel.png')
-    
-    
-    %h1 Lista Rondas
-    
-    %table
-      %thead
-        %tr
-          %th Nº Ronda
-          %th Cantidad de jugadores
-          %th Clima 
-          %th Número ganador 
-          %th Tiempo para la próxima ronda
-          %th
-          %th
-          %th
-    
-      %tbody
-        - @roulettes.each do |roulette|
-          %tr
-            %td= roulette.number_rounds
-            %td= 4 
-            %td= roulette.weather_avg
-            %td= roulette.winning_number
-            %td 
-              %span.timer 
-            %td= link_to 'Detalle', roulette
-            %td= link_to 'Acelerar ronda', '#'
-       
-    
-    = link_to 'Volver', games_path
-    = link_to 'Terminar Juego', '#'
+
+= link_to 'Volver', roulettes_path
+= link_to 'Terminar Juego', '#'

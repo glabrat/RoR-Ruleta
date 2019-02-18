@@ -10,9 +10,15 @@ class RoulettesController < ApplicationController
   # GET /roulettes/1
   # GET /roulettes/1.json
   def show
-    @game = Game.find(params[:id])
-    
-    @player_bet = roulette.player_bet
+    # if Roulette.exists?(game_id: @game.id)
+    #   @roulettes = Roulette.where(game_id: @game.id)
+    # else
+    #   @roulettes = Roulette.new(game_id: @game.id, weather_avg: 10, number_rounds: 1, winning_number: roulette.spin)
+    #   @roulettes.save
+    # end
+    @roulettes = Roulette.all
+    @game = Game.first!
+    #@player_bet = roulette.player_bet
   end
 
   # GET /roulettes/new
@@ -27,6 +33,7 @@ class RoulettesController < ApplicationController
   # POST /roulettes
   # POST /roulettes.json
   def create
+    @roulettes = RouletteGame.new
     @roulette = Roulette.new(roulette_params)
 
     respond_to do |format|
@@ -72,6 +79,6 @@ class RoulettesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def roulette_params
-      params.fetch(:roulette, {})
+      params.permit(:game_id, :weather_avg, :number_rounds, :winning_number)
     end
 end

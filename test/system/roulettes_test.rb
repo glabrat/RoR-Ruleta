@@ -14,6 +14,10 @@ class RoulettesTest < ApplicationSystemTestCase
     visit roulettes_url
     click_on "New Roulette"
 
+    fill_in "Game", with: @roulette.game_id
+    fill_in "Number rounds", with: @roulette.number_rounds
+    fill_in "Weather avg", with: @roulette.weather_avg
+    fill_in "Winning number", with: @roulette.winning_number
     click_on "Create Roulette"
 
     assert_text "Roulette was successfully created"
@@ -24,6 +28,10 @@ class RoulettesTest < ApplicationSystemTestCase
     visit roulettes_url
     click_on "Edit", match: :first
 
+    fill_in "Game", with: @roulette.game_id
+    fill_in "Number rounds", with: @roulette.number_rounds
+    fill_in "Weather avg", with: @roulette.weather_avg
+    fill_in "Winning number", with: @roulette.winning_number
     click_on "Update Roulette"
 
     assert_text "Roulette was successfully updated"

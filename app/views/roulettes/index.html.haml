@@ -3,6 +3,10 @@
 %table
   %thead
     %tr
+      %th Game
+      %th Weather avg
+      %th Number rounds
+      %th Winning number
       %th
       %th
       %th
@@ -10,6 +14,10 @@
   %tbody
     - @roulettes.each do |roulette|
       %tr
+        %td= roulette.game_id
+        %td= roulette.weather_avg
+        %td= roulette.number_rounds
+        %td= roulette.winning_number
         %td= link_to 'Show', roulette
         %td= link_to 'Edit', edit_roulette_path(roulette)
         %td= link_to 'Destroy', roulette, method: :delete, data: { confirm: 'Are you sure?' }
@@ -17,3 +25,5 @@
 %br
 
 = link_to 'New Roulette', new_roulette_path
+
+= link_to 'Volver', games_path
