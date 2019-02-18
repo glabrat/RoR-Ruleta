@@ -52,16 +52,42 @@ class RouletteGame
     end
 
     def random_player_bet(money)
-        bet = @weather > 20? rand(3..7) : rand(8..15)
-        return (money / 100) * bet
+        @weather_avg ||= self.get_weather
+        bet = @weather_avg > 20? rand(3..7) : rand(8..15)
+        @money_bet = (money / 100) * bet
+        return @money_bet
+    end
+
+    def win_lose
+        roulette_color = self.number_to_color(@number_roulette)
+        player_color = self.number_to_color(@player_bet)
+        multiplier = 0
+        if roulette_color == player_color 
+            if roulette_color == 'green'
+                multiplier = 15
+            else
+                multiplier = 2
+            end
+        end
+
+        return (@money_bet * multiplier)
     end
 
     def get_weather
-        require 'uri'
-        require 'net/http'
+        require 'open-uri'
+        weather_avg = 0
         api_key = Rails.application.credentials.dig(:secret_key_weather_api) #https://www.viget.com/articles/storing-secret-credentials-in-rails-5-2-and-up/
-        uri = URI("http://api.meteored.cl/index.php?api_lang=cl&localidad=18578&affiliate_id=#{api_key}")
-        Net::HTTP.post_form(uri ,{}).body
+        doc = Nokogiri::XML(open("http://api.meteored.cl/index.php?api_lang=cl&localidad=18578&affiliate_id=#{api_key}"))
+        #Se busca el valor de xml, la temperatura mínima y máxima están en el atributo de la etiqueta
+        doc.css('forecast').each do |dc|
+            is_integer=Integer(dc["value"]) rescue false 
+            if is_integer
+                weather_avg += is_integer
+            end
+        end
+        #Se divide tempmin1..tempmin + tempmax1..tempmaxn / n * 2
+        @weather_avg = weather_avg / 14
+        return @weather_avg
     end
 
 end
