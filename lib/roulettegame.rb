@@ -59,7 +59,7 @@ class RouletteGame
     def get_weather
         require 'uri'
         require 'net/http'
-        api_key = Rails.application.credentials.dig(:secret_key_weather_api)
+        api_key = Rails.application.credentials.dig(:secret_key_weather_api) #https://www.viget.com/articles/storing-secret-credentials-in-rails-5-2-and-up/
         uri = URI("http://api.meteored.cl/index.php?api_lang=cl&localidad=18578&affiliate_id=#{api_key}")
         Net::HTTP.post_form(uri ,{}).body
     end
