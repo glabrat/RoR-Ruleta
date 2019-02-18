@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 2019_02_18_213255) do
     t.integer "time_rounds"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "Game"
     t.boolean "auto_play"
   end
 
