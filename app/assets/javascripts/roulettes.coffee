@@ -15,3 +15,9 @@ getTimeLeft = () ->
 
 $(document).ready -> 
 	config_timer()
+	setInterval(autoPlay, 180000)
+	
+
+autoPlay = () ->
+	$.post '/roulettes',
+		weather_avg: 1
