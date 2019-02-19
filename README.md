@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Living demo: 
+    - https://ror-ruleta.herokuapp.com/
 
-Things you may want to cover:
+* Ruby version : 2.6.0
 
-* Ruby version
-
-* System dependencies
-
+* System dependencies 
+    - Postgres
+    - Ruby 2.6.0
+    - Rails 5.2.2
+    - Linux ubuntu 14+ o similares
 * Configuration
+    - Es necesario crear un rol con el mismo nombre del usuario en Postgres https://www.digitalocean.com/community/tutorials/como-instalar-y-utilizar-postgresql-en-ubuntu-16-04-es
 
 * Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
+    -`rails db:migrate`
 * Deployment instructions
-
-* ...
+    -`rails s`

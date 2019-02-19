@@ -60,7 +60,6 @@
 %table
   %thead
     %tr
-      %th Nº Ronda
       %th Dinero del jugador
       %th Dinero apostado por el jugador
       %th Apuesta
@@ -69,7 +68,6 @@
   %tbody
     - @rounds.each do |round|
       %tr
-        %td= round.number_rounds
         %td= round.player_money
         %td= round.player_money_bet
         %td{:class => number_to_color(round.player_bet)}
@@ -80,3 +78,6 @@
 
 %p= link_to 'Añadir jugadores', new_player_path
 %p= link_to 'Juego Nuevo', 'games'
+
+  %p= link_to 'Github', 'https://www.github.com/glabrat/ror-ruleta'
+    %p= link_to 'Meteored (Api para el tiempo climático)', 'https://www.meteored.cl/'
