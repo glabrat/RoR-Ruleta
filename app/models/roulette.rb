@@ -1,4 +1,4 @@
 class Roulette < ApplicationRecord
-    belongs_to :game
     has_many :rounds
+    has_many :players, through: :rounds
 end

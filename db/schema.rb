@@ -10,20 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_18_213255) do
+ActiveRecord::Schema.define(version: 2019_02_19_004905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "games", force: :cascade do |t|
-    t.string "name"
-    t.integer "min_players"
-    t.integer "max_players"
-    t.integer "time_rounds"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "auto_play"
-  end
 
   create_table "players", force: :cascade do |t|
     t.string "name"
@@ -33,23 +23,24 @@ ActiveRecord::Schema.define(version: 2019_02_18_213255) do
   end
 
   create_table "roulettes", force: :cascade do |t|
-    t.integer "game_id"
     t.integer "weather_avg"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "number_rounds"
     t.integer "winning_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "rounds", force: :cascade do |t|
+    t.bigint "player_id"
+    t.bigint "roulette_id"
     t.integer "player_money"
     t.integer "player_money_bet"
     t.integer "player_bet"
-    t.integer "player_id"
-    t.integer "roulette_id"
+    t.integer "player_final_money"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "player_final_money"
+    t.index ["player_id"], name: "index_rounds_on_player_id"
+    t.index ["roulette_id"], name: "index_rounds_on_roulette_id"
   end
 
 end

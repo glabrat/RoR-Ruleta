@@ -14,7 +14,7 @@
         %td= round.player_money
         %td= round.player_money_bet
         %td{:class => number_to_color(round.player_bet)}
-          = "#{number_to_color(round.player_bet)}"
+          = "#{number_to_color(round.player_bet).capitalize}"
         %td= round.player_final_money
         
 %br

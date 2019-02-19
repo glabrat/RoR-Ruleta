@@ -5,7 +5,6 @@ class RoulettesController < ApplicationController
   # GET /roulettes.json
   def index
     @roulettes = Roulette.all
-    @game = Game.first!
     @players = Player.all
     @rounds = Round.joins(:roulette)
   end
@@ -14,7 +13,6 @@ class RoulettesController < ApplicationController
   # GET /roulettes/1.json
   def show
     @roulettes = Roulette.all
-    @game = Game.first!
     @players = Player.all
     @rounds = Round.joins(:roulette)
   end
@@ -33,10 +31,9 @@ class RoulettesController < ApplicationController
   def create
     roulette_game = RouletteGame.new
     roulette_hash_db = Hash.new
-    @game = Game.first!
     @roulette = Roulette.last
     roulette_number_round = @roulette ? @roulette.number_rounds + 1 : params[:number_rounds]
-    roulette_hash_db = { :game_id => @game.id, :weather_avg => roulette_game.get_weather_avg, :number_rounds => roulette_number_round, :winning_number => roulette_game.spin } 
+    roulette_hash_db = { :weather_avg => roulette_game.get_weather_avg, :number_rounds => roulette_number_round, :winning_number => roulette_game.spin } 
 
     @roulette = Roulette.new(roulette_hash_db)
 
@@ -104,6 +101,6 @@ class RoulettesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def roulette_params
-      params.permit(:game_id, :weather_avg, :number_rounds, :winning_number)
+      params.permit(:weather_avg, :number_rounds, :winning_number)
     end
 end

@@ -1,59 +1,15 @@
 %p#notice= notice
 
 %p
-  %b Nombre de la sala:
-  = @game.name
-%p
-  %b Mínimo de jugadores:
-  = @game.min_players
-%p
-  %b Máximo de jugadores:
-  = @game.max_players
-%p
-  %b Tiempo entre rondas:
-  %span.time_rounds= @game.time_rounds
-%p
   %b Temperatura promedio:
-  = @roulettes.last.weather_avg
+  = @roulettes.exists? ? @roulettes.last.weather_avg : 0
 %p
   %b Ronda actual:
   = @roulettes.maximum(:number_rounds)
-%p{:class => number_to_color(@roulettes.last.winning_number)}
-  %b Último Resultado de la Ruleta:
-  = number_to_color(@roulettes.last.winning_number).capitalize
 
 =image_tag ('wheel.png')
 
-%h1 Lista Rondas
-
-%table
-  %thead
-    %tr
-      %th Nº Ronda
-      %th Cantidad de jugadores
-      %th Temperatura promedio (°c) 
-      %th Número ganador 
-      %th Tiempo para la próxima ronda
-      %th
-      %th
-      %th
-
-  %tbody
-    - @roulettes.each do |roulette|
-      %tr
-        %td= roulette.number_rounds
-        %td= @players.count 
-        %td= roulette.weather_avg
-        %td{:class => number_to_color(roulette.winning_number)}
-          = number_to_color(roulette.winning_number).capitalize
-        - if roulette == @roulettes.last
-          %td 
-            %span.timer 
-        - else
-          %td 0
-        %td= link_to 'Detalle', '/rounds/'
-        -if roulette == @roulettes.last
-          %td= button_to 'Acelerar Ronda!', roulette_path('', game_id: roulette.game_id, number_rounds: roulette.number_rounds + 1)
+=render 'round_table' 
 
 %h2 Resultado de la ronda
 
@@ -76,8 +32,11 @@
         
 %br
 
-%p= link_to 'Añadir jugadores', new_player_path
-%p= link_to 'Juego Nuevo', 'games'
 
-  %p= link_to 'Github', 'https://www.github.com/glabrat/ror-ruleta'
-    %p= link_to 'Meteored (Api para el tiempo climático)', 'https://www.meteored.cl/'
+%p= link_to 'Añadir jugadores', new_player_path
+
+%p= button_to '¡Jugar!', roulette_path('', number_rounds: 1)
+
+= link_to 'Github', 'https://www.github.com/glabrat/ror-ruleta'
+\|
+= link_to 'Meteored (Api para el tiempo climático)', 'https://www.meteored.cl/'
