@@ -1,0 +1,18 @@
+%h2 Resultado de la ronda
+
+%table
+    %thead
+    %tr
+        %th Dinero del jugador
+        %th Dinero apostado por el jugador
+        %th Apuesta
+        %th Dinero total
+        
+    %tbody
+    - @rounds.each do |round|
+        %tr
+        %td= round.player_money
+        %td= round.player_money_bet
+        %td{:class => number_to_color(round.player_bet)}
+            = "#{number_to_color(round.player_bet).capitalize}"
+        %td= round.player_final_money

@@ -11,31 +11,14 @@
 
 =render 'round_table' 
 
-%h2 Resultado de la ronda
-
-%table
-  %thead
-    %tr
-      %th Dinero del jugador
-      %th Dinero apostado por el jugador
-      %th Apuesta
-      %th Dinero total
-      
-  %tbody
-    - @rounds.each do |round|
-      %tr
-        %td= round.player_money
-        %td= round.player_money_bet
-        %td{:class => number_to_color(round.player_bet)}
-          = "#{number_to_color(round.player_bet).capitalize}"
-        %td= round.player_final_money
+=render 'round_detail'
         
 %br
 
 
 %p= link_to 'Añadir jugadores', new_player_path
 
-%p= button_to '¡Jugar!', roulette_path('', number_rounds: 1)
+%p= button_to '¡Jugar!', roulette_path('', weather_avg: 1)
 
 = link_to 'Github', 'https://www.github.com/glabrat/ror-ruleta'
 \|

@@ -10,6 +10,7 @@ config_timer = () ->
 getTimeLeft = () -> 
   
   time_left -= 1;
+  
   document.querySelector(".timer").innerHTML = time_left 
 
 $(document).ready -> 
