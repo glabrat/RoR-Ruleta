@@ -1,6 +1,5 @@
 class DropGamesUpdateRoulettes < ActiveRecord::Migration[5.2]
   def change
-    drop_table :games
     drop_table :roulettes
 
     create_table :roulettes do |t|
