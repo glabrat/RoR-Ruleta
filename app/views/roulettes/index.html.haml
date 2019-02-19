@@ -18,9 +18,9 @@
 %p
   %b Ronda actual:
   = @roulettes.maximum(:number_rounds)
-%p
-  %b Número ganador:
-  = @roulettes.last.winning_number
+%p{:class => number_to_color(@roulettes.last.winning_number)}
+  %b Último Resultado de la Ruleta:
+  = number_to_color(@roulettes.last.winning_number).capitalize
 
 =image_tag ('wheel.png')
 
@@ -31,7 +31,7 @@
     %tr
       %th Nº Ronda
       %th Cantidad de jugadores
-      %th Clima 
+      %th Temperatura promedio (°c) 
       %th Número ganador 
       %th Tiempo para la próxima ronda
       %th
@@ -44,7 +44,8 @@
         %td= roulette.number_rounds
         %td= @players.count 
         %td= roulette.weather_avg
-        %td= roulette.winning_number
+        %td{:class => number_to_color(roulette.winning_number)}
+          = number_to_color(roulette.winning_number).capitalize
         - if roulette == @roulettes.last
           %td 
             %span.timer 
@@ -54,5 +55,28 @@
         -if roulette == @roulettes.last
           %td= button_to 'Acelerar Ronda!', roulette_path('', game_id: roulette.game_id, number_rounds: roulette.number_rounds + 1)
 
-= link_to 'Volver', roulettes_path
-= link_to 'Terminar Juego', '#'
+%h2 Resultado de la ronda
+
+%table
+  %thead
+    %tr
+      %th Nº Ronda
+      %th Dinero del jugador
+      %th Dinero apostado por el jugador
+      %th Apuesta
+      %th Dinero total
+      
+  %tbody
+    - @rounds.each do |round|
+      %tr
+        %td= round.number_rounds
+        %td= round.player_money
+        %td= round.player_money_bet
+        %td{:class => number_to_color(round.player_bet)}
+          = "#{number_to_color(round.player_bet).capitalize}"
+        %td= round.player_final_money
+        
+%br
+
+%p= link_to 'Añadir jugadores', new_player_path
+%p= link_to 'Juego Nuevo', 'games'

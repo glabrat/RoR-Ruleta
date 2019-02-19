@@ -7,6 +7,7 @@ class RoulettesController < ApplicationController
     @roulettes = Roulette.all
     @game = Game.first!
     @players = Player.all
+    @rounds = Round.joins(:roulette)
   end
 
   # GET /roulettes/1
@@ -15,6 +16,7 @@ class RoulettesController < ApplicationController
     @roulettes = Roulette.all
     @game = Game.first!
     @players = Player.all
+    @rounds = Round.joins(:roulette)
   end
 
   # GET /roulettes/new
@@ -31,7 +33,10 @@ class RoulettesController < ApplicationController
   def create
     roulette_game = RouletteGame.new
     roulette_hash_db = Hash.new
-    roulette_hash_db = { :game_id => params[:game_id], :weather_avg => roulette_game.get_weather_avg, :number_rounds => params[:number_rounds], :winning_number => roulette_game.spin } 
+    @game = Game.first!
+    @roulette = Roulette.last
+    roulette_number_round = @roulette ? @roulette.number_rounds + 1 : params[:number_rounds]
+    roulette_hash_db = { :game_id => @game.id, :weather_avg => roulette_game.get_weather_avg, :number_rounds => roulette_number_round, :winning_number => roulette_game.spin } 
 
     @roulette = Roulette.new(roulette_hash_db)
 
@@ -81,7 +86,7 @@ class RoulettesController < ApplicationController
       player_money_bet = player_money <= 1000 ? player_money : @roulette_game.random_player_bet(player_money)
       player_bet = @roulette_game.player_bet
       player_money_gained = @roulette_game.win_lose(@roulette.winning_number, player_bet, player_money_bet)
-      player_final_money = (player_money - player_money_bet) + player_money_gained
+      player_final_money = player_money + player_money_gained
       round_per_player = { :player_money => player_money, :player_money_bet => player_money_bet, :player_bet => player_bet, :player_id => player.id, :roulette_id => @roulette.id, :player_final_money => player_final_money} 
 
       @round = Round.new(round_per_player)

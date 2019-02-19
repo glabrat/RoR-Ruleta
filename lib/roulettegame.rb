@@ -72,9 +72,10 @@ class RouletteGame
             else
                 multiplier = 2
             end
+            else
+                multiplier = -1
         end
-
-        return (player_money_bet * multiplier)
+        return player_money_bet * multiplier
     end
 
     def get_weather_avg

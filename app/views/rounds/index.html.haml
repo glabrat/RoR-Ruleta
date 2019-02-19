@@ -1,29 +1,20 @@
-%h1 Listing rounds
+%h1 Lista de Rondas
 
 %table
   %thead
     %tr
-      %th Player money
-      %th Player money bet
-      %th Player bet
-      %th Player
-      %th Roulette
-      %th Player final money
-      %th
-      %th
-      %th
-
+      %th Dinero del jugador
+      %th Dinero apostado por el jugador
+      %th Apuesta
+      %th Dinero total
+      
   %tbody
     - @rounds.each do |round|
       %tr
         %td= round.player_money
         %td= round.player_money_bet
-        %td= round.player_bet
-        %td= round.player_id
-        %td= round.roulette_id
+        %td{:class => number_to_color(round.player_bet)}
+          = "#{number_to_color(round.player_bet)}"
         %td= round.player_final_money
-        %td= link_to 'Show', round
-        %td= link_to 'Edit', edit_round_path(round)
-        %td= link_to 'Destroy', round, method: :delete, data: { confirm: 'Are you sure?' }
-
+        
 %br
