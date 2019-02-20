@@ -32,7 +32,7 @@ class RoulettesController < ApplicationController
     roulette_game = RouletteGame.new
     roulette_hash_db = Hash.new
     @roulette = Roulette.last
-    roulette_number_round = @roulette ? @roulette.number_rounds + 1 : params[:number_rounds]
+    roulette_number_round = @roulette ? @roulette.number_rounds + 1 : 1
     roulette_hash_db = { :weather_avg => roulette_game.get_weather_avg, :number_rounds => roulette_number_round, :winning_number => roulette_game.spin } 
 
     @roulette = Roulette.new(roulette_hash_db)
