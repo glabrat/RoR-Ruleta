@@ -11,6 +11,7 @@ getTimeLeft = () ->
   
   time_left -= 1;
   
+  time_left = 180 if time_left < 1
   document.querySelector(".timer").innerHTML = time_left 
 
 $(document).ready -> 
