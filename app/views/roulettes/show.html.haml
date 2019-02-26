@@ -1,16 +1,6 @@
 %p#notice= notice
 
-%p
-  %b Temperatura promedio:
-  = @roulettes.last.weather_avg
-%p
-  %b Ronda actual:
-  = @roulettes.maximum(:number_rounds)
-%p{:class => number_to_color(@roulettes.last.winning_number)}
-  %b Último Resultado de la Ruleta:
-  = number_to_color(@roulettes.last.winning_number).capitalize
-
-=image_tag ('wheel.png')
+=render 'roulette_info'
 
 =render 'round_table' 
 

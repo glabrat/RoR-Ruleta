@@ -52,14 +52,10 @@ class RouletteGame
     end
 
     def random_player_bet(money)
-        @weather_avg ||= self.get_weather
+        @weather_avg ||= Weather.week_avg
         bet = @weather_avg > 20? rand(3..7) : rand(8..15)
         money_bet = (money / 100) * bet
         return money_bet
-    end
-
-    def set_weather_avg(weather_avg)
-        @weather_avg = weather_avg
     end
 
     def win_lose(number_roulette, player_bet, player_money_bet)
@@ -77,22 +73,4 @@ class RouletteGame
         end
         return player_money_bet * multiplier
     end
-
-    def get_weather_avg
-        require 'open-uri'
-        weather_avg = 0
-        api_key = Rails.application.credentials.dig(:secret_key_weather_api) #https://www.viget.com/articles/storing-secret-credentials-in-rails-5-2-and-up/
-        doc = Nokogiri::XML(open("http://api.meteored.cl/index.php?api_lang=cl&localidad=18578&affiliate_id=#{api_key}"))
-        #Se busca el valor de xml, la temperatura mínima y máxima están en el atributo de la etiqueta
-        doc.css('forecast').each do |dc|
-            is_integer=Integer(dc["value"]) rescue false 
-            if is_integer
-                weather_avg += is_integer
-            end
-        end
-        #Se divide tempmin1..tempmin + tempmax1..tempmaxn / n * 2
-        @weather_avg = weather_avg / 14
-        return @weather_avg
-    end
-
 end

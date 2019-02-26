@@ -1,30 +1,31 @@
 %h1 Lista Rondas
 
-%table
+%table.pure-table
     %thead
-    %tr
-        %th Nº Ronda
-        %th Cantidad de jugadores
-        %th Temperatura promedio (°c) 
-        %th Número ganador 
-        %th Tiempo para la próxima ronda
-        %th
-        %th
+        %tr
+            %th Nº Ronda
+            %th Cantidad de jugadores
+            %th Temperatura promedio (°c) 
+            %th Número ganador 
+            %th Tiempo para la próxima ronda
+            %th Opción
+            %th Acelerar Ronda
 
     %tbody
-    - @roulettes.each do |roulette|
-        %tr
-        %td= roulette.number_rounds
-        %td= @players.count 
-        %td= roulette.weather_avg
-        %td{:class => number_to_color(roulette.winning_number)}
-            = number_to_color(roulette.winning_number).capitalize
-        - if roulette == @roulettes.last
-            %td 
-                %span.timer 
-        - else
-            %td 0
-        %td= link_to 'Detalle', '/rounds/'
-        -if roulette == @roulettes.last
-            %td= button_to 'Acelerar Ronda!', roulette_path('', number_rounds: roulette.number_rounds + 1)
-        
+        - @roulettes.each.with_index do |roulette, index|
+            %tr{:class => index.odd? ? "pure-table-odd" : ""}
+                %td= roulette.number_rounds
+                %td= @players.count 
+                %td= Weather.week_avg
+                %td{:class => number_to_color(roulette.winning_number)}
+                    = number_to_color(roulette.winning_number).capitalize
+                - if roulette == @roulettes.last
+                    %td 
+                        %span.timer 
+                - else
+                    %td 0
+                %td= link_to 'Detalle', '/rounds/'
+                - if roulette == @roulettes.last
+                    %td= button_to 'Acelerar Ronda!', roulette_path('', number_rounds: roulette.number_rounds + 1)
+                - else
+                    %td

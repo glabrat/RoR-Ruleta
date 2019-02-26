@@ -14,4 +14,18 @@ module ApplicationHelper
             return 'verde'
         end
     end
+    #Weird thing may work
+    def win_lose_money(player_money, final_player_money)
+        final_player_money - player_money
+    end
+    def win_lose_money_color(player_money, final_player_money)
+        total = self.win_lose_money(player_money, final_player_money)
+        if total < 0
+            return 'rojo'
+        elsif total == 0
+            return 'negro'
+        else
+            return 'verde'
+        end
+    end
 end

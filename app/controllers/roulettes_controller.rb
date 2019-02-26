@@ -33,7 +33,7 @@ class RoulettesController < ApplicationController
     roulette_hash_db = Hash.new
     @roulette = Roulette.last
     roulette_number_round = @roulette ? @roulette.number_rounds + 1 : 1
-    roulette_hash_db = { :weather_avg => roulette_game.get_weather_avg, :number_rounds => roulette_number_round, :winning_number => roulette_game.spin } 
+    roulette_hash_db = { :number_rounds => roulette_number_round, :winning_number => roulette_game.spin } 
 
     @roulette = Roulette.new(roulette_hash_db)
 
@@ -76,8 +76,7 @@ class RoulettesController < ApplicationController
   def make_round_happen    
     @players = Player.all
     @roulette_game = RouletteGame.new
-    @roulette_game.set_weather_avg(@roulette.weather_avg)
-
+    
     @players.each do |player|
       player_money = player.money
       player_money_bet = player_money <= 1000 ? player_money : @roulette_game.random_player_bet(player_money)
@@ -101,6 +100,6 @@ class RoulettesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def roulette_params
-      params.permit(:weather_avg, :number_rounds, :winning_number)
+      params.permit(:number_rounds, :winning_number)
     end
 end

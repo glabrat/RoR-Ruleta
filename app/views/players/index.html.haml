@@ -14,9 +14,8 @@
       %tr
         %td= player.name
         %td= number_to_pesos(player.money)
-        %td= link_to 'Show', player
-        %td= link_to 'Edit', edit_player_path(player)
-        %td= link_to 'Destroy', player, method: :delete, data: { confirm: '¿Está seguro?' }
+        %td= link_to 'Ver', player
+        %td= link_to 'Editar', edit_player_path(player)
 
 %br
 

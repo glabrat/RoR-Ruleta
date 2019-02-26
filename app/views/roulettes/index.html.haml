@@ -1,13 +1,6 @@
 %p#notice= notice
 
-%p
-  %b Temperatura promedio:
-  = @roulettes.exists? ? @roulettes.last.weather_avg : 0
-%p
-  %b Ronda actual:
-  = @roulettes.maximum(:number_rounds)
-
-=image_tag ('wheel.png')
+=render 'roulette_info'
 
 =render 'round_table' 
 

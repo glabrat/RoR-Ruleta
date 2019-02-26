@@ -1,0 +1,11 @@
+%p
+    %b Temperatura promedio:
+    = Weather.week_avg
+%p
+    %b Ronda actual:
+    = @roulettes.maximum(:number_rounds)
+%p{:class => number_to_color(@roulettes.last.winning_number)}
+    %b Último Resultado de la Ruleta:
+    = number_to_color(@roulettes.last.winning_number).capitalize
+
+=image_tag ('roulette.gif')

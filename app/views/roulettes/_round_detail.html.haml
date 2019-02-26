@@ -1,18 +1,25 @@
 %h2 Resultado de la ronda
 
-%table
+%table.pure-table
   %thead
     %tr
+      %th Ronda
+      %th Nombre Jugador
       %th Dinero del jugador
       %th Dinero apostado por el jugador
       %th Apuesta
+      %th Dinero Ganado/Perdido
       %th Dinero total
 
   %tbody
-    - @rounds.each do |round|
-      %tr
+    - @rounds.each.with_index do |round, index|
+      %tr{:class => index.odd? ? "pure-table-odd" : ""}
+        %td= "NA"
+        %td= "NA"
         %td= round.player_money
         %td= round.player_money_bet
         %td{:class => number_to_color(round.player_bet)}
           = "#{number_to_color(round.player_bet).capitalize}"
+        %td{:class => win_lose_money_color(round.player_money, round.player_final_money)}
+          = win_lose_money(round.player_money, round.player_final_money)
         %td= round.player_final_money

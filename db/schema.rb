@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_19_004905) do
+ActiveRecord::Schema.define(version: 2019_02_26_183300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 2019_02_19_004905) do
   end
 
   create_table "roulettes", force: :cascade do |t|
-    t.integer "weather_avg"
     t.integer "number_rounds"
     t.integer "winning_number"
     t.datetime "created_at", null: false
@@ -41,6 +40,13 @@ ActiveRecord::Schema.define(version: 2019_02_19_004905) do
     t.datetime "updated_at", null: false
     t.index ["player_id"], name: "index_rounds_on_player_id"
     t.index ["roulette_id"], name: "index_rounds_on_roulette_id"
+  end
+
+  create_table "weathers", force: :cascade do |t|
+    t.integer "weather_avg"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_weathers_on_created_at"
   end
 
 end
