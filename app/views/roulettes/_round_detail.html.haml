@@ -6,7 +6,7 @@
       %th Ronda
       %th Nombre Jugador
       %th Dinero del jugador
-      %th Dinero apostado por el jugador
+      %th Dinero apostado por el jugador (% apostado)
       %th Apuesta
       %th Dinero Ganado/Perdido
       %th Dinero total
@@ -17,7 +17,7 @@
         %td= "NA"
         %td= "NA"
         %td= round.player_money
-        %td= round.player_money_bet
+        %td= "#{round.player_money_bet} (#{bet_percentage(round.player_money, round.player_money_bet)})"
         %td{:class => number_to_color(round.player_bet)}
           = "#{number_to_color(round.player_bet).capitalize}"
         %td{:class => win_lose_money_color(round.player_money, round.player_final_money)}

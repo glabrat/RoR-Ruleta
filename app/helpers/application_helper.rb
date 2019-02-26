@@ -28,4 +28,7 @@ module ApplicationHelper
             return 'verde'
         end
     end
+    def bet_percentage(player_money, player_bet)
+        return "#{(player_bet * 100 / player_money)} %"
+    end
 end
