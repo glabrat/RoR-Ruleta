@@ -15,6 +15,7 @@ module WeatherService
             weather_avg = weather_avg / 14
             weather = Weather.new(weather_avg: weather_avg)
             weather.save!
+            return weather
         end
     end
 end

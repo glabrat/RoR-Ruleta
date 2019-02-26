@@ -4,7 +4,9 @@ class Weather < ApplicationRecord
         if weather_avg.exists? 
             return weather_avg.pluck(:weather_avg)[0]
         else
-            return WeatherService.santiago_weather_avg.pluck(:weather_avg)[0]
+            WeatherService.santiago_weather_avg
+            weather_avg = Weather.where("created_at >= ?", Time.zone.now.beginning_of_day)
+            return weather_avg.pluck(:weather_avg)[0]
         end
     end
 end

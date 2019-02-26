@@ -5,16 +5,16 @@ class RoulettesController < ApplicationController
   # GET /roulettes.json
   def index
     @roulettes = Roulette.all
-    @players = Player.all
-    @rounds = Round.joins(:roulette)
+    @players = Player.player_rounds
+    @rounds = Round.all_needed
   end
 
   # GET /roulettes/1
   # GET /roulettes/1.json
   def show
     @roulettes = Roulette.all
-    @players = Player.all
-    @rounds = Round.joins(:roulette)
+    @players = Player.player_rounds
+    @rounds = Round.all_needed
   end
 
   # GET /roulettes/new

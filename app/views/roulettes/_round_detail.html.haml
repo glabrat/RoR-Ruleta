@@ -14,8 +14,8 @@
   %tbody
     - @rounds.each.with_index do |round, index|
       %tr{:class => index.odd? ? "pure-table-odd" : ""}
-        %td= "NA"
-        %td= "NA"
+        %td= round.number_rounds
+        %td= round.name
         %td= round.player_money
         %td= "#{round.player_money_bet} (#{bet_percentage(round.player_money, round.player_money_bet)})"
         %td{:class => number_to_color(round.player_bet)}

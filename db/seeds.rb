@@ -7,3 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Player.create({name: 'Bot 1', money: 10000})
+Weather.create(weather_avg: 23)
